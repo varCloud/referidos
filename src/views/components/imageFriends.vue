@@ -3,7 +3,7 @@
   <template class="d-flex d-lg-none">
     <v-row justify="center">
       <v-col cols="12">
-        <v-img src="/src/assets/images/Home/friends.svg" cover></v-img>
+        <v-img src="/src/assets/images/Home/friends.svg" height="98%"></v-img>
       </v-col>
       <v-col cols="8" class="text-friends">
         <span>También tus amigos merecen nuestros beneficios</span>

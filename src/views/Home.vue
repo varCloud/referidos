@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-left: 3%; padding-right: 3%;">
     <v-row class="color" justify="center">
       <v-col lg="5" xl="5" md="12" sm="12" xs="12" cols="12">
         <imageFriend></imageFriend>
@@ -14,7 +14,7 @@
           <img src="/src/assets/images/benefits/benefits.svg">
         </div>
         <div class="container-woman">
-          <img src="/src/assets/images/Home/womanLarge.svg" class="woman">
+          <img src="/src/assets/images/Home/woman.png" class="woman">
         </div>
 
       </div>
@@ -79,6 +79,8 @@ import slide from "./components/slide.vue"
   height: 628px;
 }
 
+
+
 .container-imgs {
   display: flex;
   justify-content: space-between;
@@ -99,5 +101,6 @@ import slide from "./components/slide.vue"
     display: flex;
     justify-content: center;
   }
+
 }
 </style>

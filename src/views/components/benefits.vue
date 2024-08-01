@@ -2,10 +2,10 @@
   <template class="d-flex d-sm-none pt-4">
     <v-row justify="center">
       <v-col cols="12">
-        <v-img class="mx-auto" src="/src/assets/images/Home/benefits.svg" width="229px" height="78px"></v-img>
+        <v-img class="mx-auto" src="/src/assets/images/Home/benefits.svg" width="70%"></v-img>
       </v-col>
       <v-col cols="12">
-        <v-img src="/src/assets/images/Home/woman.svg" width="430px" height="273px" cover></v-img>
+        <v-img src="/src/assets/images/Home/woman.svg" cover></v-img>
       </v-col>
       <v-col cols="8" class="text-friends">
         <span>Únete a los más de <span class="color-green">600 mil socios</span> que ya están disfrutando de nuestros
@@ -43,7 +43,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="6" align-self="end">
         <v-row justify="end">
           <!-- <v-img src="/src/assets/images/Home/womanLarge.svg" height="628px" width="628px"></v-img> -->
         </v-row>

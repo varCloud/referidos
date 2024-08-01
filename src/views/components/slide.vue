@@ -116,10 +116,8 @@ const props = defineProps(['isLarge'])
 }
 
 .swiper-slide {
-   width: 100% !important;
-   display: flex;
-   justify-content: center;
-  }
-
-
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
 </style>

@@ -14,7 +14,7 @@
           Tel. 800 3000 268
           conatcto@cajamorelia.com.mx</span>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="7">
         <socialNetWork TypeIcons="Dark"></socialNetWork>
       </v-col>
 
@@ -38,12 +38,12 @@
             class="color-green">necesitas</span>
         </span>
       </v-col>
-      <v-col cols="10" class="text-large ml-10">
+      <v-col cols="8" class="text-large ml-10">
         <span class="text-dom">Acatita de bajan 222, Morelia, Mich.<br>
           Tel. 800 3000 268<br>
           conatcto@cajamorelia.com.mx</span>
       </v-col>
-      <v-col cols="1" align-self="end">
+      <v-col cols="3" align-self="end">
         <socialNetWork TypeIcons="White"></socialNetWork>
       </v-col>
       <v-col cols="12" class="text-large ml-10 text-center mt-10">

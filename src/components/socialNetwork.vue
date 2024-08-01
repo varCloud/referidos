@@ -1,19 +1,17 @@
 <template>
   <v-row align="center" justify="center">
-    <div class="inline-content">
-      <template v-for="(icon, index) in icons" :key="index">
-        <v-col cols="2">
-          <v-btn density="comfortable" variant="text" :href="icon.link">
-            <v-img :src="getIconPath(icon.name)" :height="icon.height" :width="icon.width"></v-img>
-          </v-btn>
-        </v-col>
-      </template>
-    </div>
+    <template v-for="(icon, index) in icons" :key="index">
+      <v-col cols="2">
+        <a :href="icon.link" target="_blank">
+          <img class="icon" :src="getIconPath(icon.name)" :class="icon.class">
+        </a>
+      </v-col>
+    </template>
   </v-row>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const props = defineProps(['TypeIcons']);
 
@@ -42,20 +40,39 @@ const getIconPath = (iconName) => {
   return `${basePath}${iconName}${suffix}.svg`;
 };
 
-const iconDimensions = computed(() => {
-  return props.TypeIcons === 'White' || props.TypeIcons === 'GreenLarge' ? { height: '48px', width: '48px' } : { height: '24px', width: '24px' };
+const iconClass = computed(() => {
+  return props.TypeIcons === 'White' || props.TypeIcons === 'GreenLarge' ? 'icon-large' : 'icon-small';
 });
 
-icons.value = icons.value.map(icon => ({
-  ...icon,
-  height: iconDimensions.value.height,
-  width: iconDimensions.value.width
-}));
+watch(
+  () => props.TypeIcons,
+  () => {
+    icons.value = icons.value.map(icon => ({
+      ...icon,
+      class: iconClass.value
+    }));
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped>
 .inline-content {
   display: flex;
   align-items: center;
+}
+
+.icon {
+  display: block;
+}
+
+.icon-small {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-large {
+  width: 48px;
+  height: 48px;
 }
 </style>
