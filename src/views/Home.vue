@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-left: 3%; padding-right: 3%;">
+  <div>
     <v-row class="color" justify="center">
       <v-col lg="5" xl="5" md="12" sm="12" xs="12" cols="12">
         <imageFriend></imageFriend>
