@@ -1,6 +1,6 @@
 <template>
   <v-app-bar color="primary" prominent>
-    <v-row class="position-relative" no-gutters>
+    <v-row class="position-relative d-flex d-sm-none" no-gutters>
       <v-col cols="1">
         <v-app-bar-nav-icon height="24px" style="padding-left: 20px;" width="24px" variant="text"
           @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
