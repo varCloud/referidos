@@ -7,7 +7,7 @@
       <v-col cols="12">
         <v-img src="/src/assets/images/Home/woman.svg" cover></v-img>
       </v-col>
-      <v-col cols="8" class="text-friends">
+      <v-col cols="11" class="text-friends">
         <span>Únete a los más de <span class="color-green">600 mil socios</span> que ya están disfrutando de nuestros
           servicios financieros con beneficios
           exclusivos en <span class="color-green">financiamiento, ahorro e inversión</span>.</span>

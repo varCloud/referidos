@@ -1,17 +1,19 @@
 <template>
   <v-app-bar color="primary" prominent>
-    <v-row class="d-flex d-sm-none" no-gutters>
+    <v-row class="position-relative" no-gutters>
       <v-col cols="1">
         <v-app-bar-nav-icon height="24px" style="padding-left: 20px;" width="24px" variant="text"
           @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-col>
-      <v-col cols="8" class="d-flex justify-center align-center">
-        <v-img src="/src/assets/images/logoCMVNombre.svg" height="26px" width="117px"></v-img>
+      <v-col cols="7">
+        <v-img src="/src/assets/images/logoCMVNombre.svg" class="position-absolute center-image" height="26px"
+          width="117px"></v-img>
       </v-col>
-      <v-col cols="3">
+      <v-col cols="4">
         <socialNetWork TypeIcons="Green"></socialNetWork>
       </v-col>
     </v-row>
+
 
     <v-row class="d-none d-sm-flex" noGutters>
       <v-col cols="2">
@@ -41,4 +43,10 @@ import { ref, computed } from "vue";
 const drawer = ref(false)
 
 </script>
-<style></style>
+<style scoped>
+.center-image {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>

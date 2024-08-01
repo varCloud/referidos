@@ -1,7 +1,7 @@
 <template>
   <v-row align="center" justify="center">
     <template v-for="(icon, index) in icons" :key="index">
-      <v-col cols="2">
+      <v-col cols="3">
         <a :href="icon.link" target="_blank">
           <img class="icon" :src="getIconPath(icon.name)" :class="icon.class">
         </a>

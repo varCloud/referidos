@@ -1,7 +1,7 @@
 <template>
   <template class="d-flex d-sm-none">
     <v-row justify="center" class="">
-      <v-col cols="10" class="text-saving-title">
+      <v-col cols="11" class="text-saving-title">
         <span><span class="color-green">Cuenta de Ahorros</span> y Transferencias electrónicas ilimitadas</span>
       </v-col>
       <v-col cols="12" class="text-saving-subtitle">
@@ -9,7 +9,7 @@
         <img src="/src/assets/images/Home/plus.svg">
         <span class="thank-you-text"> una cuenta</span>
       </v-col>
-      <v-col cols="10" class=text-saving>
+      <v-col cols="11" class=text-saving>
         <span>para que ahorres, ganes intereses y transfieras dinero cuando quieras desde nuestra <span class="bold">app
             CMV+</span></span>
       </v-col>
@@ -54,7 +54,6 @@
 </template>
 <script setup>
 import slide from "./slide.vue"
-import test from "./text.vue"
 </script>
 <style scoped>
 .text-saving-title {
