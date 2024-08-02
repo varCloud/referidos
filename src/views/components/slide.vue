@@ -43,7 +43,6 @@ import { ref } from "vue";
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-
 // Módulos a utilizar
 const modules = ref([Pagination, Navigation, Autoplay])
 const dataCards = ref([{
