@@ -6,7 +6,7 @@
           @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-col>
       <v-col cols="7">
-        <v-img src="/src/assets/images/logoCMVNombre.svg" class="position-absolute center-image" height="26px"
+        <v-img src="../../assets/images/logoCMVNombre.svg" class="position-absolute center-image" height="26px"
           width="117px"></v-img>
       </v-col>
       <v-col cols="4">
@@ -21,7 +21,7 @@
           style="padding-left: 20px;"></v-app-bar-nav-icon>
       </v-col>
       <v-col cols="7" class="d-flex justify-center">
-        <v-img src="/src/assets/images/logoCMVNombre.svg" height="40px" width="150px"></v-img>
+        <v-img src="../../assets/images/logoCMVNombre.svg" height="40px" width="150px"></v-img>
       </v-col>
       <v-col cols="2">
         <socialNetWork TypeIcons="GreenLarge"></socialNetWork>

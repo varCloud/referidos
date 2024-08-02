@@ -26,7 +26,7 @@ const icons = ref([
 ]);
 
 const getIconPath = (iconName) => {
-  let basePath = '/src/assets/images/SocialMedia/';
+  let basePath = './src/assets/images/SocialMedia/';
   let suffix = '';
 
   if (props.TypeIcons === 'Green' || props.TypeIcons === 'GreenLarge') {

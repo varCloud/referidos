@@ -47,19 +47,19 @@ import 'swiper/css/navigation'
 // Módulos a utilizar
 const modules = ref([Pagination, Navigation, Autoplay])
 const dataCards = ref([{
-  img: '/src/assets/images/slides/oxxo.svg',
+  img: './src/assets/images/slides/oxxo.svg',
   title: 'Paga y retira en OXXO',
   text: 'Deposita a tu cuenta de débito y realiza abonos a tus créditos desde cualquier tienda'
 }, {
-  img: '/src/assets/images/slides/savingsAccount.svg',
+  img: './src/assets/images/slides/savingsAccount.svg',
   title: 'Cuenta de ahorro',
   text: 'Gana intereses por guardar tu dinero en esta cuenta y úsalo cuando quieras'
 }, {
-  img: '/src/assets/images/slides/investments.svg',
+  img: './src/assets/images/slides/investments.svg',
   title: 'Inversiones',
   text: 'Haz que tu dinero crezca más con nuestras inversiones con grandes <span class="color-green">rendimientos</span>'
 }, {
-  img: '/src/assets/images/slides/spei.svg',
+  img: './src/assets/images/slides/spei.svg',
   title: 'Transferencias SPEI',
   text: 'Transfiere de manera segura desde la app CMV+ a cualquier otro banco'
 },])
