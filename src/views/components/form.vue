@@ -9,19 +9,21 @@
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textTelCel }}</span>
-        <v-text-field v-model="telCel" :rules="[rules.required, rules.phone]" rounded="lg" class="customHolder"
-          :placeholder="textTelCel" variant="outlined" required @blur="touchField('telCel')"
+        <v-text-field v-model="telCel" :rules="[rules.required, rules.phone]" maxlength="10" rounded="lg"
+          class="customHolder" type="tel" :placeholder="textTelCel" variant="outlined" required
+          @blur="touchField('telCel')" @input="telCel = telCel.replace(/[^0-9]/g, '')"
           :error-messages="telCelTouched ? telCelErrors : []"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textCurp }}</span>
-        <v-text-field v-model="curp" :rules="[rules.required, rules.curp]" rounded="lg" class="customHolder"
-          :placeholder="textCurp" variant="outlined" required @blur="touchField('curp')"
-          :error-messages="curpTouched ? curpErrors : []"></v-text-field>
+        <v-text-field v-model="curp" :rules="[rules.required, rules.curp]" maxlength="18" rounded="lg"
+          class="customHolder" :placeholder="textCurp" variant="outlined" required @blur="touchField('curp')"
+          @input="curp = curp.toUpperCase()" :error-messages="curpTouched ? curpErrors : []"
+          style="text-transform: uppercase"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textEmail }}</span>
-        <v-text-field v-model="email" :rules="[rules.required, rules.email]" rounded="lg" type="email"
+        <v-text-field v-model="email" :rules="[rules.required, rules.email]" maxlength="40" rounded="lg" type="email"
           class="customHolder" :placeholder="textEmail" variant="outlined" required @blur="touchField('email')"
           :error-messages="emailTouched ? emailErrors : []"></v-text-field>
       </v-col>
@@ -29,9 +31,9 @@
     <v-row class="d-flex justify-center mt-0">
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCP }}</span>
-        <v-text-field v-model="cp" :rules="[rules.required, rules.numeric]" rounded="lg" class="customHolder"
-          :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"
-          :error-messages="cpTouched ? cpErrors : []"></v-text-field>
+        <v-text-field v-model="cp" :rules="[rules.required, rules.numeric]" maxlength="5" type="number" rounded="lg"
+          class="customHolder" :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"
+          @input="cp = cp.replace(/[^0-9]/g, '')" :error-messages="cpTouched ? cpErrors : []" />
       </v-col>
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCR }}</span>
@@ -62,8 +64,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import referidosService from "@/services/referidosService"
+import { useRoute } from 'vue-router';
 
 const textNombre = ref("Nombre(s)*");
 const textTelCel = ref("Teléfono celular*");
@@ -123,6 +126,14 @@ const rules = {
 
 const snackBarSuccess = ref(false);
 const snackBarDanger = ref(false);
+
+const route = useRoute();
+
+onMounted(() => {
+  if (route.query.codigoReferido) {
+    cr.value = route.query.codigoReferido
+  }
+})
 
 const nombreErrors = computed(() => {
   const errorMessages = [];

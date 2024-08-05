@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row  class="color" justify="center">
+    <v-row class="color" justify="center">
       <v-col lg="5" xl="5" md="12" sm="12" xs="12" cols="12">
         <imageFriend></imageFriend>
       </v-col>
@@ -8,7 +8,7 @@
         <formCMV></formCMV>
       </v-col>
     </v-row>
-    <v-row  justify="center" class="wrapper-container-imgs">
+    <v-row justify="center" class="wrapper-container-imgs">
       <div class="container-imgs d-none d-sm-flex">
         <div class="container-benefits">
           <img src="../assets/images/benefits/benefits.svg">
@@ -22,7 +22,7 @@
         <benefits></benefits>
       </v-col>
     </v-row>
-    <v-row  justify="center">
+    <v-row justify="center">
       <v-col lg="10" xl="10" md="12" sm="12" xs="12" cols="12">
         <savingAccount></savingAccount>
       </v-col>
@@ -55,9 +55,10 @@ import slide from "./components/slide.vue"
 
 
 @media (max-width: 500px) {
-  body{
+  body {
     overflow: hidden;
   }
+
   .wrapper-container-imgs {
     height: max-content;
   }
