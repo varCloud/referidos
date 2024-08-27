@@ -59,7 +59,7 @@
     Registro Creado Con Éxito!!!
   </v-snackbar>
   <v-snackbar :timeout="2000" color="error" v-model="snackBarDanger" rounded="pill">
-    Ocurrió un error
+    {{ errorMensaje }}
   </v-snackbar>
 </template>
 
@@ -126,6 +126,7 @@ const rules = {
 
 const snackBarSuccess = ref(false);
 const snackBarDanger = ref(false);
+const errorMensaje = ref("Ocurrió un error")
 
 const route = useRoute();
 
@@ -197,6 +198,7 @@ const submitForm = async () => {
       }
       else {
         snackBarDanger.value = true
+        errorMensaje.value = response.data.AltaRegistroReferidoResult.Mensaje
       }
     }).catch(error => {
       snackBarDanger.value = true
