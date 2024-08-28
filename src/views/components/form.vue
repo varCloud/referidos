@@ -4,43 +4,39 @@
       <v-col cols="10">
         <span class="textLabel">{{ textNombre }}</span>
         <v-text-field :loading="loading" v-model="nombre" :rules="[rules.required]" rounded="lg" class="customHolder"
-          :placeholder="textNombre" variant="outlined" required @blur="touchField('nombre')"
-          :error-messages="nombreTouched ? nombreErrors : []"></v-text-field>
+          :placeholder="textNombre" variant="outlined" required @blur="touchField('nombre')"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textTelCel }}</span>
         <v-text-field :loading="loading" v-model="telCel" :rules="[rules.required, rules.phone]" maxlength="10"
           rounded="lg" class="customHolder" type="tel" :placeholder="textTelCel" variant="outlined" required
-          @blur="touchField('telCel')" @input="telCel = telCel.replace(/[^0-9]/g, '')"
-          :error-messages="telCelTouched ? telCelErrors : []"></v-text-field>
+          @blur="touchField('telCel')" @input="telCel = telCel.replace(/[^0-9]/g, '')"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textCurp }}</span>
         <v-text-field :loading="loading" v-model="curp" :rules="[rules.required, rules.curp]" maxlength="18"
           rounded="lg" class="customHolder" :placeholder="textCurp" variant="outlined" required
-          @blur="touchField('curp')" @input="curp = curp.toUpperCase()" :error-messages="curpTouched ? curpErrors : []"
+          @blur="touchField('curp')" @input="curp = curp.toUpperCase()"
           style="text-transform: uppercase"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textEmail }}</span>
         <v-text-field :loading="loading" v-model="email" :rules="[rules.required, rules.email]" maxlength="40"
           rounded="lg" type="email" class="customHolder" :placeholder="textEmail" variant="outlined" required
-          @blur="touchField('email')" :error-messages="emailTouched ? emailErrors : []"></v-text-field>
+          @blur="touchField('email')"></v-text-field>
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center mt-0">
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCP }}</span>
-        <v-text-field :loading="loading" v-model="cp" :rules="[rules.required, rules.numeric]" maxlength="5"
-          type="number" rounded="lg" class="customHolder" :placeholder="textCP" variant="outlined" required
-          @blur="touchField('cp')" @input="cp = cp.replace(/[^0-9]/g, '')"
-          :error-messages="cpTouched ? cpErrors : []" />
+        <v-text-field :loading="loading" v-model="cp" :rules="[rules.required, rules.numeric]" type="number"
+          rounded="lg" class="customHolder" :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"
+          @input="cp = cp.replace(/[^0-9]/g, '')" />
       </v-col>
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCR }}</span>
         <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder"
-          :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"
-          :error-messages="crTouched ? crErrors : []"></v-text-field>
+          :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"></v-text-field>
       </v-col>
     </v-row>
     <v-row class="d-flex d-sm-none" justify="center">
@@ -121,11 +117,11 @@ const touchField = (field) => {
 };
 
 const rules = {
-  required: value => !!value || 'Este campo es obligatorio',
-  email: value => /.+@.+\..+/.test(value) || 'Introduce un email válido',
-  phone: value => /^\d{10}$/.test(value) || 'Introduce un número de teléfono válido',
-  curp: value => /^([A-Z]{1}[AEIOU]{1}[A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[MH]{1}[A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z\d]{1}\d{1})$/.test(value) || 'Introduce un CURP válido',
-  numeric: value => /^\d+$/.test(value) || 'Debe ser un valor numérico'
+  required: value => !!value || 'ESTE CAMPO ES OBLIGATORIO',
+  email: value => /.+@.+\..+/.test(value) || 'INTRODUCE UN EMAIL VÁLIDO',
+  phone: value => /^\d{10}$/.test(value) || 'INTRODUCE UN NÚMERO DE TELÉFONO VÁLIDO',
+  curp: value => /^([A-Z]{1}[AEIOU]{1}[A-Z]{2}\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[MH]{1}[A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z\d]{1}\d{1})$/.test(value) || 'INTRODUCE UN CURP VÁLIDO',
+  numeric: value => /^\d+$/.test(value) || 'DEBE SER UN VALOR NUMÉRICO'
 };
 
 
@@ -140,46 +136,6 @@ onMounted(() => {
     cr.value = route.query.codigoReferido
   }
 })
-
-const nombreErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(nombre.value) !== true && errorMessages.push(rules.required(nombre.value));
-  return errorMessages;
-});
-
-const telCelErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(telCel.value) !== true && errorMessages.push(rules.required(telCel.value));
-  rules.phone(telCel.value) !== true && errorMessages.push(rules.phone(telCel.value));
-  return errorMessages;
-});
-
-const curpErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(curp.value) !== true && errorMessages.push(rules.required(curp.value));
-  rules.curp(curp.value) !== true && errorMessages.push(rules.curp(curp.value));
-  return errorMessages;
-});
-
-const emailErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(email.value) !== true && errorMessages.push(rules.required(email.value));
-  rules.email(email.value) !== true && errorMessages.push(rules.email(email.value));
-  return errorMessages;
-});
-
-const cpErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(cp.value) !== true && errorMessages.push(rules.required(cp.value));
-  rules.numeric(cp.value) !== true && errorMessages.push(rules.numeric(cp.value));
-  return errorMessages;
-});
-
-const crErrors = computed(() => {
-  const errorMessages = [];
-  rules.required(cr.value) !== true && errorMessages.push(rules.required(cr.value));
-  return errorMessages;
-});
 
 const submitForm = async () => {
   loading.value = true;
@@ -200,6 +156,7 @@ const submitForm = async () => {
     };
     referidosService.altaRegistroReferido(formData).then(response => {
       loading.value = false;
+      console.log(response.status == 200, response.data.AltaRegistroReferidoResult.Codigo == 200);
 
       if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
         initForm()
@@ -216,11 +173,17 @@ const submitForm = async () => {
 };
 
 const initForm = () => {
+  form.value.reset()
   nombre.value = ''
   telCel.value = ''
   curp.value = ''
   email.value = ''
-  cr.value = ''
+  if (route.query.codigoReferido) {
+    cr.value = route.query.codigoReferido
+  }
+  else {
+    cr.value = ''
+  }
   cp.value = ''
   loading.value = false;
   nombreTouched.value = false;
