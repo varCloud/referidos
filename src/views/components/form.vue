@@ -3,60 +3,63 @@
     <v-row justify="center" no-gutters class="mt-0 mt-sm-10">
       <v-col cols="10">
         <span class="textLabel">{{ textNombre }}</span>
-        <v-text-field v-model="nombre" :rules="[rules.required]" rounded="lg" class="customHolder"
+        <v-text-field :loading="loading" v-model="nombre" :rules="[rules.required]" rounded="lg" class="customHolder"
           :placeholder="textNombre" variant="outlined" required @blur="touchField('nombre')"
           :error-messages="nombreTouched ? nombreErrors : []"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textTelCel }}</span>
-        <v-text-field v-model="telCel" :rules="[rules.required, rules.phone]" maxlength="10" rounded="lg"
-          class="customHolder" type="tel" :placeholder="textTelCel" variant="outlined" required
+        <v-text-field :loading="loading" v-model="telCel" :rules="[rules.required, rules.phone]" maxlength="10"
+          rounded="lg" class="customHolder" type="tel" :placeholder="textTelCel" variant="outlined" required
           @blur="touchField('telCel')" @input="telCel = telCel.replace(/[^0-9]/g, '')"
           :error-messages="telCelTouched ? telCelErrors : []"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textCurp }}</span>
-        <v-text-field v-model="curp" :rules="[rules.required, rules.curp]" maxlength="18" rounded="lg"
-          class="customHolder" :placeholder="textCurp" variant="outlined" required @blur="touchField('curp')"
-          @input="curp = curp.toUpperCase()" :error-messages="curpTouched ? curpErrors : []"
+        <v-text-field :loading="loading" v-model="curp" :rules="[rules.required, rules.curp]" maxlength="18"
+          rounded="lg" class="customHolder" :placeholder="textCurp" variant="outlined" required
+          @blur="touchField('curp')" @input="curp = curp.toUpperCase()" :error-messages="curpTouched ? curpErrors : []"
           style="text-transform: uppercase"></v-text-field>
       </v-col>
       <v-col cols="10">
         <span class="textLabel">{{ textEmail }}</span>
-        <v-text-field v-model="email" :rules="[rules.required, rules.email]" maxlength="40" rounded="lg" type="email"
-          class="customHolder" :placeholder="textEmail" variant="outlined" required @blur="touchField('email')"
-          :error-messages="emailTouched ? emailErrors : []"></v-text-field>
+        <v-text-field :loading="loading" v-model="email" :rules="[rules.required, rules.email]" maxlength="40"
+          rounded="lg" type="email" class="customHolder" :placeholder="textEmail" variant="outlined" required
+          @blur="touchField('email')" :error-messages="emailTouched ? emailErrors : []"></v-text-field>
       </v-col>
     </v-row>
     <v-row class="d-flex justify-center mt-0">
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCP }}</span>
-        <v-text-field v-model="cp" :rules="[rules.required, rules.numeric]" maxlength="5" type="number" rounded="lg"
-          class="customHolder" :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"
-          @input="cp = cp.replace(/[^0-9]/g, '')" :error-messages="cpTouched ? cpErrors : []" />
+        <v-text-field :loading="loading" v-model="cp" :rules="[rules.required, rules.numeric]" maxlength="5"
+          type="number" rounded="lg" class="customHolder" :placeholder="textCP" variant="outlined" required
+          @blur="touchField('cp')" @input="cp = cp.replace(/[^0-9]/g, '')"
+          :error-messages="cpTouched ? cpErrors : []" />
       </v-col>
       <v-col cols="10" sm="5" class="pt-0">
         <span class="textLabel">{{ textCR }}</span>
-        <v-text-field v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder" :placeholder="textCR"
-          variant="outlined" required @blur="touchField('cr')"
+        <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder"
+          :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"
           :error-messages="crTouched ? crErrors : []"></v-text-field>
       </v-col>
     </v-row>
     <v-row class="d-flex d-sm-none" justify="center">
       <v-col cols="8">
-        <v-btn rounded="pill" class="text-center text-btn" :disabled="!valid" color="black" type="submit" block>¡Quiero
+        <v-btn rounded="pill" :loading="loading" class="text-center text-btn" :disabled="!valid" color="black"
+          type="submit" block>¡Quiero
           ser socio!</v-btn>
       </v-col>
     </v-row>
     <v-row class="d-none d-sm-flex" justify="end">
       <v-col cols="6" class="margin-btn pr-10">
-        <v-btn rounded="pill" class="text-center text-btn" :disabled="!valid" color="black" type="submit" block>¡Quiero
+        <v-btn rounded="pill" :loading="loading" class="text-center text-btn" :disabled="!valid" color="black"
+          type="submit" block>¡Quiero
           ser socio!</v-btn>
       </v-col>
     </v-row>
   </v-form>
   <v-snackbar :timeout="2000" color="success" v-model="snackBarSuccess" rounded="pill">
-    Registro Creado Con Éxito!!!
+    Te has registrado de manera exitosa!!!
   </v-snackbar>
   <v-snackbar :timeout="2000" color="error" v-model="snackBarDanger" rounded="pill">
     {{ errorMensaje }}
@@ -67,6 +70,8 @@
 import { ref, computed, onMounted } from "vue";
 import referidosService from "@/services/referidosService"
 import { useRoute } from 'vue-router';
+
+const loading = ref(false);
 
 const textNombre = ref("Nombre(s)*");
 const textTelCel = ref("Teléfono celular*");
@@ -177,6 +182,7 @@ const crErrors = computed(() => {
 });
 
 const submitForm = async () => {
+  loading.value = true;
   nombreTouched.value = true;
   telCelTouched.value = true;
   curpTouched.value = true;
@@ -193,7 +199,10 @@ const submitForm = async () => {
       CodigoReferido: cr.value
     };
     referidosService.altaRegistroReferido(formData).then(response => {
+      loading.value = false;
+
       if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
+        initForm()
         snackBarSuccess.value = true
       }
       else {
@@ -205,6 +214,22 @@ const submitForm = async () => {
     });
   }
 };
+
+const initForm = () => {
+  nombre.value = ''
+  telCel.value = ''
+  curp.value = ''
+  email.value = ''
+  cr.value = ''
+  cp.value = ''
+  loading.value = false;
+  nombreTouched.value = false;
+  telCelTouched.value = false;
+  curpTouched.value = false;
+  emailTouched.value = false;
+  cpTouched.value = false;
+  crTouched.value = false;
+}
 </script>
 
 <style lang="scss" scoped>
