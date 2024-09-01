@@ -8,6 +8,11 @@
         <formCMV></formCMV>
       </v-col>
     </v-row>
+    <v-row justify="center" class="color">
+      <v-col lg="10" xl="10" md="12" sm="12" xs="12" cols="12">
+        <premios></premios>
+      </v-col>
+    </v-row>
     <v-row justify="center" class="wrapper-container-imgs">
       <div class="container-imgs d-none d-sm-flex">
         <div class="container-benefits">
@@ -28,11 +33,16 @@
       </v-col>
       <v-col lg="10" xl="10" md="12" sm="12" xs="12" cols="12">
         <template class="d-flex d-sm-none pt-15">
-          <slide :isLarge="true"></slide>
+          <slide :dataCards="dataCards" :isLarge="true"></slide>
         </template>
       </v-col>
     </v-row>
-    <v-row style="margin: 0%; background-color: #343A40;">
+    <v-row class="pt-5 d-flex d-lg-none" style="margin: 0%; background-color: #343A40;">
+      <v-col>
+        <footerCMV></footerCMV>
+      </v-col>
+    </v-row>
+    <v-row class="background-black pt-5 d-none d-lg-flex" style="margin: 0%; background-color: #1D1D1B;">
       <v-col>
         <footerCMV></footerCMV>
       </v-col>
@@ -47,6 +57,26 @@ import benefits from "./components/benefits.vue";
 import savingAccount from "./components/savingAccount.vue"
 import footerCMV from "./components/footer.vue"
 import slide from "./components/slide.vue"
+import premios from "./components/premios.vue";
+import { ref } from "vue";
+
+const dataCards = ref([{
+  img: './src/assets/images/slides/oxxo.svg',
+  title: 'Paga y retira en OXXO',
+  text: 'Deposita a tu cuenta de débito y realiza abonos a tus créditos desde cualquier tienda'
+}, {
+  img: './src/assets/images/slides/savingsAccount.svg',
+  title: 'Cuenta de ahorro',
+  text: 'Gana intereses por guardar tu dinero en esta cuenta y úsalo cuando quieras'
+}, {
+  img: './src/assets/images/slides/investments.svg',
+  title: 'Inversiones',
+  text: 'Haz que tu dinero crezca más con nuestras inversiones con grandes <span class="color-green">rendimientos</span>'
+}, {
+  img: './src/assets/images/slides/spei.svg',
+  title: 'Transferencias SPEI',
+  text: 'Transfiere de manera segura desde la app CMV+ a cualquier otro banco'
+},])
 </script>
 <style>
 .color {

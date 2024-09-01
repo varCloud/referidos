@@ -20,7 +20,7 @@
       <v-row>
         <v-col cols="6" class="v-col-lg-6 v-col-sm-12">
           <div class="inline-content">
-            <v-img src="/src/assets/images/Home/rectangleGreenSlit.svg" width="10px" height="231px"></v-img>
+            <v-img src="/src/assets/images/Home/rectangleGreenLarge.svg" width="20px" height="231px"></v-img>
             <span class="text-saving-title-large pl-8"><span class="color-green">Cuenta de Ahorros</span> <br>y
               Transferencias
               electrónicas ilimitadas</span>
@@ -46,7 +46,7 @@
           </v-row>
         </v-col>
         <v-col cols="5">
-          <slide :isLarge="true"></slide>
+          <slide :dataCards="dataCards" :isLarge="true"></slide>
         </v-col>
       </v-row>
     </v-container>
@@ -54,6 +54,25 @@
 </template>
 <script setup>
 import slide from "./slide.vue"
+import { ref } from "vue";
+
+const dataCards = ref([{
+  img: './src/assets/images/slides/oxxo.svg',
+  title: 'Paga y retira en OXXO',
+  text: 'Deposita a tu cuenta de débito y realiza abonos a tus créditos desde cualquier tienda'
+}, {
+  img: './src/assets/images/slides/savingsAccount.svg',
+  title: 'Cuenta de ahorro',
+  text: 'Gana intereses por guardar tu dinero en esta cuenta y úsalo cuando quieras'
+}, {
+  img: './src/assets/images/slides/investments.svg',
+  title: 'Inversiones',
+  text: 'Haz que tu dinero crezca más con nuestras inversiones con grandes <span class="color-green">rendimientos</span>'
+}, {
+  img: './src/assets/images/slides/spei.svg',
+  title: 'Transferencias SPEI',
+  text: 'Transfiere de manera segura desde la app CMV+ a cualquier otro banco'
+},])
 </script>
 <style scoped>
 .text-saving-title {

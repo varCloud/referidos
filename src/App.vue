@@ -13,4 +13,19 @@
   background: white !important;
   border-radius: 10px;
 }
+
+.v-select input {
+  background-color: white !important;
+  border-radius: 10px !important;
+}
+
+.v-select .v-field__input {
+  background-color: white !important;
+  border-radius: 10px !important;
+}
+
+.v-select .v-input__control {
+  background-color: white !important;
+  border-radius: 10px !important;
+}
 </style>
