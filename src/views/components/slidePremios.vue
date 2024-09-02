@@ -1,25 +1,10 @@
 <template>
-  <swiper v-if="props.fullPage == true" :modules="modulesFull" :breakpoints="{
-    640: {
-      slidesPerView: 1,
-      spaceBetween: 20,
-    },
-    '768': {
-      slidesPerView: 1,
-      spaceBetween: 40,
-    },
-    '1024': {
-      slidesPerView: 1,
-      spaceBetween: 50,
-    },
-  }">
-    <swiper-slide v-for="dataCard in props.dataCards" class="slides-full-page">
+  <v-row justify="center" v-if="fullPage">
+    <v-col cols="auto" v-for="dataCard in props.dataCards" class="slides-full-page">
       <v-card class="my-card elevation-4 rounded-lg">
-        <!-- Imagen -->
         <div class="image-overlay">
           <v-img :src="dataCard.img" class="overlay-image mx-auto"></v-img>
         </div>
-        <!-- Texto -->
         <v-card-text class="text-card">
           <v-row justify="center" no-gutters class="text-center">
             <v-col cols="12">
@@ -28,8 +13,8 @@
           </v-row>
         </v-card-text>
       </v-card>
-    </swiper-slide>
-  </swiper>
+    </v-col>
+  </v-row>
   <swiper v-else class="swiper" :modules="modules" :space-between="0" :slides-per-view="1"
     :pagination="{ clickable: true, }" :style="{
       '--swiper-navigation-color': '#84BD00',
@@ -43,11 +28,9 @@
     }">
     <swiper-slide v-for="dataCard in props.dataCards" class="slides swiper-slide-custom">
       <v-card class="my-card elevation-4 rounded-lg">
-        <!-- Imagen -->
         <div class="image-overlay">
           <v-img :src="dataCard.img" class="overlay-image mx-auto"></v-img>
         </div>
-        <!-- Texto -->
         <v-card-text class="text-card">
           <v-row justify="center" no-gutters class="text-center">
             <v-col cols="12">
@@ -61,19 +44,13 @@
 </template>
 <script setup>
 import { Pagination, Navigation, Autoplay } from 'swiper/modules'
-// import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
 import { ref } from "vue";
-
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-// Módulos a utilizar
+
 const modules = ref([Pagination, Navigation, Autoplay])
-const modulesFull = ref([Pagination])
-
-
 const props = defineProps(['dataCards', 'fullPage'])
 
 </script>
