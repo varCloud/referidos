@@ -114,9 +114,9 @@
           @blur="touchField('curp')" @input="curp = curp.toUpperCase()"
           style="text-transform: uppercase"></v-text-field>
       </v-col>
-      <v-row class="d-none d-sm-flex" no-gutters justify="center">
+      <v-row no-gutters justify="center">
         <v-col cols="10" class="text-right">
-          <v-row class="d-none d-sm-flex" no-gutters justify="start">
+          <v-row no-gutters justify="start">
             <div class="icon-text-container" @click="handleClick">
               <img src="../../assets/images/iconInfoGreen.svg" alt="Icono" class="icon" />
               <span class="text">No recuerdo mi CURP</span>
@@ -140,14 +140,6 @@
         <span class="textLabel">{{ textCR }}</span>
         <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder"
           :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row class="d-flex d-sm-none" no-gutters justify="center">
-      <v-col cols="10">
-        <div class="icon-text-container" @click="handleClick">
-          <img src="../../assets/images/iconInfoGreen.svg" alt="Icono" class="icon" />
-          <span class="text">Registrarme con mi CURP</span>
-        </div>
       </v-col>
     </v-row>
     <v-row class="d-flex d-sm-none" justify="center">
