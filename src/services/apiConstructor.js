@@ -1,4 +1,4 @@
-import { cmvServices } from "./clientApi";
+import { cmvServices, cmvServicesOnboarding } from "./clientApi";
 
 export default {
   postCall: (url, params, payload) =>
@@ -14,6 +14,12 @@ export default {
         ...HeaderAPIManager()
       },
     }),
+  postCallOnboarding: (url, params, payload) =>
+    cmvServicesOnboarding.post(`${url}${params}`, payload, {
+      headers: {
+        ...HeaderAPIManagerOnboarding()
+      },
+    }),
 }
 
 const HeaderAPIManager = () => {
@@ -24,5 +30,10 @@ const HeaderAPIManager = () => {
     'rejectUnauthorized': 'false',
     'TokenAutenticacion': import.meta.env.VITE_TOKEN_AUTENTICACION
   }
+};
 
+const HeaderAPIManagerOnboarding = () => {
+  return {
+    'X-IBM-Client-Id': `${import.meta.env.VITE_IBM_CLIENT_ID_ONBOARDING}`,
+  }
 };

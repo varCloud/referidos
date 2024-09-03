@@ -30,7 +30,7 @@
   </v-app-bar>
 
   <v-navigation-drawer v-model="drawer" temporary>
-    <v-list :items="items"></v-list>
+    <!-- <v-list :items="items"></v-list> -->
   </v-navigation-drawer>
 </template>
 

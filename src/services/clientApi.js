@@ -6,4 +6,11 @@ var cmvServices = axios.create({
   },
 });
 
-export { cmvServices };
+var cmvServicesOnboarding = axios.create({
+  baseURL: import.meta.env.VITE_MAIN_SERVICE_ONBOARDING,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+export { cmvServices, cmvServicesOnboarding };

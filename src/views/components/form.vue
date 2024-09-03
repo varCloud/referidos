@@ -1,5 +1,5 @@
 <template>
-  <v-form v-if="formCompleto" ref="form" v-model="valid" @submit.prevent="submitForm">
+  <v-form v-if="formCompleto" ref="form" v-model="valid" @submit.prevent="submitFormGeneric(false)">
     <v-row justify="center" no-gutters class="mt-0 mt-sm-10">
       <v-col cols="10">
         <span class="textLabel">{{ textNombre }}</span>
@@ -28,9 +28,9 @@
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
         <span class="textLabel">{{ textMesNacimiento }}</span>
-        <v-select :items="meses" :loading="loading" v-model="mesNacimiento" :rules="[rules.required]" rounded="lg"
-          class="customHolder" :placeholder="textMesNacimiento" variant="outlined" required
-          @blur="touchField('mesNacimiento')"></v-select>
+        <v-select :items="meses" item-title="texto" item-value="valor" :loading="loading" v-model="mesNacimiento"
+          :rules="[rules.required]" rounded="lg" class="customHolder" :placeholder="textMesNacimiento"
+          variant="outlined" required @blur="touchField('mesNacimiento')"></v-select>
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textAnioNacimiento }}</span>
@@ -40,15 +40,15 @@
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
         <span class="textLabel">{{ textSexo }}</span>
-        <v-select :items="sexos" :loading="loading" v-model="sexo" :rules="[rules.required]" rounded="lg"
-          class="customHolder" :placeholder="textSexo" variant="outlined" required
-          @blur="touchField('sexo')"></v-select>
+        <v-select :items="sexos" item-title="texto" item-value="valor" :loading="loading" v-model="sexo"
+          :rules="[rules.required]" rounded="lg" class="customHolder" :placeholder="textSexo" variant="outlined"
+          required @blur="touchField('sexo')" />
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textEstado }}</span>
-        <v-select :items="estados" :loading="loading" v-model="estado" :rules="[rules.required]" rounded="lg"
-          class="customHolder" :placeholder="textEstado" variant="outlined" required
-          @blur="touchField('estado')"></v-select>
+        <v-select :items="estados" item-title="nombre_entidad" item-value="clave_entidad" :loading="loadingEstados"
+          v-model="estado" :rules="[rules.required]" rounded="lg" class="customHolder" :placeholder="textEstado"
+          variant="outlined" required @blur="touchField('estado')"></v-select>
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
         <span class="textLabel">{{ textTelCel }}</span>
@@ -105,7 +105,7 @@
       </v-col>
     </v-row>
   </v-form>
-  <v-form v-else ref="formCurp" v-model="validCurp" @submit.prevent="submitFormCurp">
+  <v-form v-else ref="formCurp" v-model="valid" @submit.prevent="submitFormGeneric(true)">
     <v-row class="d-flex justify-center mt-0 mt-sm-10" no-gutters>
       <v-col cols="10">
         <span class="textLabel">{{ textCurp }}</span>
@@ -175,6 +175,7 @@ import referidosService from "@/services/referidosService"
 import { useRoute } from 'vue-router';
 
 const loading = ref(false);
+const loadingEstados = ref(false)
 
 const textCurp = ref("CURP")
 const textNombre = ref("Nombre(s)*");
@@ -208,44 +209,30 @@ const anioNacimiento = ref();
 const sexo = ref();
 const estado = ref();
 
-const dias = ref([...Array(31).keys()].map(i => i + 1));
-const meses = ref(["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]);
+const dias = ref(
+  [...Array(31).keys()].map(i => (i + 1).toString().padStart(2, '0'))
+);
+const meses = ref(
+  [
+    { texto: "Enero", valor: "01" },
+    { texto: "Febrero", valor: "02" },
+    { texto: "Marzo", valor: "03" },
+    { texto: "Abril", valor: "04" },
+    { texto: "Mayo", valor: "05" },
+    { texto: "Junio", valor: "06" },
+    { texto: "Julio", valor: "07" },
+    { texto: "Agosto", valor: "08" },
+    { texto: "Septiembre", valor: "09" },
+    { texto: "Octubre", valor: "10" },
+    { texto: "Noviembre", valor: "11" },
+    { texto: "Diciembre", valor: "12" }
+  ]
+);
 const anios = ref([...Array(100).keys()].map(i => new Date().getFullYear() - i));
-const sexos = ref(["Masculino", "Femenino"])
-const estados = ref([
-  "Aguascalientes",
-  "Baja California",
-  "Baja California Sur",
-  "Campeche",
-  "Chiapas",
-  "Chihuahua",
-  "Coahuila",
-  "Colima",
-  "Durango",
-  "Guanajuato",
-  "Guerrero",
-  "Hidalgo",
-  "Jalisco",
-  "Mexico",
-  "Mexico City",
-  "Michoacán",
-  "Morelos",
-  "Nayarit",
-  "Nuevo León",
-  "Oaxaca",
-  "Puebla",
-  "Querétaro",
-  "Quintana Roo",
-  "San Luis Potosí",
-  "Sinaloa",
-  "Sonora",
-  "Tabasco",
-  "Tamaulipas",
-  "Tlaxcala",
-  "Veracruz",
-  "Yucatán",
-  "Zacatecas"
-]);
+const sexos = ref([
+  { texto: "Masculino", valor: "M" },
+  { texto: "Femenino", valor: "F" }])
+const estados = ref([]);
 
 const nombreTouched = ref(false);
 const telCelTouched = ref(false);
@@ -322,107 +309,123 @@ onMounted(() => {
   }
 })
 
-const submitForm = () => {
-  loading.value = true;
-  nombreTouched.value = true;
-  telCelTouched.value = true;
-  emailTouched.value = true;
-  crTouched.value = true;
-  apellidoPaternoTouched.value = true;
-  apellidoMaternoTouched.value = true;
-  diaNacimientoTouched.value = true;
-  mesNacimientoTouched.value = true;
-  anioNacimientoTouched.value = true;
-  sexoTouched.value = true;
-  estadoTouched.value = true;
-  if (valid) {
-    const formData = {
-      Nombre: nombre.value,
-      Telefono: telCel.value,
-      Mail: email.value,
-      CodigoReferido: cr.value
-    };
-    referidosService.altaRegistroReferido(formData).then(response => {
-      loading.value = false;
-      if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
-        initForm()
-        snackBarSuccess.value = true
-      }
-      else {
-        snackBarDanger.value = true
-        errorMensaje.value = response.data.AltaRegistroReferidoResult.Mensaje
-      }
-    }).catch(error => {
+const obtenerEstados = () => {
+  loadingEstados.value = true;
+  referidosService.getEntidadesRenapo().then(response => {
+    loadingEstados.value = false;
+    if (response.status == 200 && response.data.Codigo == 200) {
+      estados.value = response.data.Entidad.response.clave_entidad
+    }
+    else {
       snackBarDanger.value = true
-    });
+      errorMensaje.value = response.data.Mensaje
+    }
+  }).catch(error => {
+    snackBarDanger.value = true
+    loadingEstados.value = false;
+  });
+}
+
+const setTouchedFields = (fields) => {
+  fields.forEach(field => {
+    field.value = true;
+  });
+};
+
+const handleResponse = (response) => {
+  loading.value = false;
+  if (response.status === 200 && response.data.AltaRegistroReferidoResult.Codigo === 200) {
+    initForm();
+    snackBarSuccess.value = true;
+  } else {
+    snackBarDanger.value = true;
+    errorMensaje.value = response.data.AltaRegistroReferidoResult.Mensaje;
   }
 };
 
-const submitFormCurp = () => {
+const submitFormGeneric = (isCurpForm = false) => {
+  console.log(isCurpForm)
+
   loading.value = true;
-  curpTouched.value = true;
-  telCelTouched.value = true;
-  emailTouched.value = true;
-  crTouched.value = true;
-  if (valid) {
-    const formData = {
-      Telefono: telCel.value,
-      Curp: curp.value,
-      Mail: email.value,
-      CodigoReferido: cr.value
-    };
-    referidosService.altaRegistroReferido(formData).then(response => {
-      loading.value = false;
-      if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
-        initForm()
-        snackBarSuccess.value = true
-      }
-      else {
-        snackBarDanger.value = true
-        errorMensaje.value = response.data.AltaRegistroReferidoResult.Mensaje
-      }
-    }).catch(error => {
-      snackBarDanger.value = true
-    });
+  if (isCurpForm) {
+    setTouchedFields([curpTouched, telCelTouched, emailTouched, crTouched]);
+  } else {
+    setTouchedFields([
+      nombreTouched,
+      telCelTouched,
+      emailTouched,
+      crTouched,
+      apellidoPaternoTouched,
+      apellidoMaternoTouched,
+      diaNacimientoTouched,
+      mesNacimientoTouched,
+      anioNacimientoTouched,
+      sexoTouched,
+      estadoTouched
+    ]);
   }
-}
+  if (valid) {
+    const formData = isCurpForm
+      ? {
+        Telefono: telCel.value,
+        Curp: curp.value,
+        Mail: email.value,
+        CodigoReferido: cr.value,
+      }
+      : {
+        ApellidoMaterno: apellidoMaterno.value,
+        ApellidoPaterno: apellidoPaterno.value,
+        CodigoReferido: cr.value,
+        EstadoNacimiento: estado.value,
+        FechaNacimiento: `${anioNacimiento.value}-${mesNacimiento.value}-${diaNacimiento.value}`,
+        Mail: email.value,
+        Nombre: nombre.value,
+        Sexo: sexo.value,
+        Telefono: telCel.value,
+      };
+    referidosService.altaRegistroReferido(formData)
+      .then(handleResponse)
+      .catch(() => {
+        loading.value = false;
+        snackBarDanger.value = true;
+      });
+  }
+};
+
+const resetFields = (fields, value = '') => {
+  fields.forEach(field => {
+    field.value = value;
+  });
+};
+
+const resetTouched = (touchedFields, value = false) => {
+  touchedFields.forEach(field => {
+    field.value = value;
+  });
+};
 
 const initForm = () => {
-  form.value.reset()
-  nombre.value = ''
-  telCel.value = ''
-  curp.value = ''
-  email.value = ''
-  apellidoPaterno.value = ''
-  apellidoMaterno.value = ''
-  diaNacimiento.value = ''
-  mesNacimiento.value = ''
-  anioNacimiento.value = ''
-  sexo.value = ''
-  estado.value = ''
-  if (route.query.codigoReferido) {
-    cr.value = route.query.codigoReferido
-  }
-  else {
-    cr.value = ''
-  }
-  loading.value = false;
-  nombreTouched.value = false;
-  telCelTouched.value = false;
-  curpTouched.value = false;
-  emailTouched.value = false;
-  crTouched.value = false;
-  apellidoPaternoTouched.value = false;
-  apellidoMaternoTouched.value = false;
-  diaNacimientoTouched.value = false;
-  mesNacimientoTouched.value = false;
-  anioNacimientoTouched.value = false;
-  sexoTouched.value = false;
-  estadoTouched.value = false;
-}
+  form.value.reset();
+  resetFields([
+    nombre, telCel, curp, email,
+    apellidoPaterno, apellidoMaterno,
+    diaNacimiento, mesNacimiento, anioNacimiento,
+    sexo, estado, cr
+  ]);
+  resetTouched([
+    nombreTouched, telCelTouched, curpTouched, emailTouched, crTouched,
+    apellidoPaternoTouched, apellidoMaternoTouched,
+    diaNacimientoTouched, mesNacimientoTouched, anioNacimientoTouched,
+    sexoTouched, estadoTouched
+  ]);
+  cr.value = route.query.codigoReferido || '';
+};
 
 const handleClick = () => {
   formCompleto.value = !formCompleto.value
+  if (formCompleto.value == true && estados.value.length == 0) {
+    obtenerEstados()
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
