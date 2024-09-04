@@ -105,7 +105,7 @@
       </v-col>
     </v-row>
   </v-form>
-  <v-form v-else ref="formCurp" v-model="valid" @submit.prevent="submitFormGeneric(true)">
+  <v-form v-else ref="form" v-model="valid" @submit.prevent="submitFormGeneric(true)">
     <v-row class="d-flex justify-center mt-0 mt-sm-10" no-gutters>
       <v-col cols="10">
         <span class="textLabel">{{ textCurp }}</span>
@@ -230,8 +230,8 @@ const meses = ref(
 );
 const anios = ref([...Array(100).keys()].map(i => new Date().getFullYear() - i));
 const sexos = ref([
-  { texto: "Masculino", valor: "M" },
-  { texto: "Femenino", valor: "F" }])
+  { texto: "Masculino", valor: "H" },
+  { texto: "Femenino", valor: "M" }])
 const estados = ref([]);
 
 const nombreTouched = ref(false);
@@ -333,8 +333,9 @@ const setTouchedFields = (fields) => {
 };
 
 const handleResponse = (response) => {
+  console.log(response, response.data.AltaRegistroReferidoResult.Codigo)
   loading.value = false;
-  if (response.status === 200 && response.data.AltaRegistroReferidoResult.Codigo === 200) {
+  if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
     initForm();
     snackBarSuccess.value = true;
   } else {
@@ -367,25 +368,29 @@ const submitFormGeneric = (isCurpForm = false) => {
   if (valid) {
     const formData = isCurpForm
       ? {
+        CodigoReferido: cr.value,
+        Mail: email.value,
         Telefono: telCel.value,
         Curp: curp.value,
-        Mail: email.value,
-        CodigoReferido: cr.value,
       }
       : {
+        AnioNacimiento: anioNacimiento.value,
         ApellidoMaterno: apellidoMaterno.value,
         ApellidoPaterno: apellidoPaterno.value,
         CodigoReferido: cr.value,
         EstadoNacimiento: estado.value,
-        FechaNacimiento: `${anioNacimiento.value}-${mesNacimiento.value}-${diaNacimiento.value}`,
+        DiaNacimiento: diaNacimiento.value,
         Mail: email.value,
+        MesNacimiento: mesNacimiento.value,
         Nombre: nombre.value,
         Sexo: sexo.value,
         Telefono: telCel.value,
       };
     referidosService.altaRegistroReferido(formData)
       .then(handleResponse)
-      .catch(() => {
+      .catch(error => {
+        console.log(error);
+
         loading.value = false;
         snackBarDanger.value = true;
       });
