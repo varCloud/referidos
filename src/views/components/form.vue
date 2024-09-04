@@ -16,9 +16,8 @@
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
         <span class="textLabel">{{ textApellidoMaterno }}</span>
-        <v-text-field :loading="loading" v-model="apellidoMaterno" :rules="[rules.required]" rounded="lg"
-          class="customHolder" :placeholder="textApellidoMaterno" variant="outlined" required
-          @blur="touchField('apellidoMaterno')"></v-text-field>
+        <v-text-field :loading="loading" v-model="apellidoMaterno" rounded="lg" class="customHolder"
+          :placeholder="textApellidoMaterno" variant="outlined" @blur="touchField('apellidoMaterno')"></v-text-field>
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textDiaNacimiento }}</span>
@@ -183,7 +182,7 @@ const textTelCel = ref("Teléfono celular*");
 const textEmail = ref("Email*");
 const textCR = ref("Código referido*");
 const textApellidoPaterno = ref("Apellido Paterno*")
-const textApellidoMaterno = ref("Apellido Materno*")
+const textApellidoMaterno = ref("Apellido Materno")
 const textDiaNacimiento = ref("Día de Nacimiento*")
 const textMesNacimiento = ref("Mes de Nacimiento*")
 const textAnioNacimiento = ref("Año de Nacimiento*")
@@ -193,7 +192,6 @@ const textEstado = ref("Estado*")
 const valid = ref(true);
 const validCurp = ref(true);
 const form = ref(null);
-const formCurp = ref(null);
 const formCompleto = ref(false);
 
 const nombre = ref("");
@@ -345,8 +343,6 @@ const handleResponse = (response) => {
 };
 
 const submitFormGeneric = (isCurpForm = false) => {
-  console.log(isCurpForm)
-
   loading.value = true;
   if (isCurpForm) {
     setTouchedFields([curpTouched, telCelTouched, emailTouched, crTouched]);
