@@ -1,11 +1,11 @@
 <template>
   <div class="container-sucess-main">
-    <img src="src/assets/images/successRegis/Isolation_Mode.svg" class="d-none d-flex isolation-mode" />
-    <img src="src/assets/images/successRegis/Isolation_Mode-1.svg" class="d-none d-flex isolation-mode-1"
+    <img src="src/assets/images/successRegis/Isolation_Mode.svg" class="d-none d-lg-flex isolation-mode" />
+    <img src="src/assets/images/successRegis/Isolation_Mode-1.svg" class="d-none d-lg-flex isolation-mode-1"
       alt="Isolation_Mode-1">
-    <img src="src/assets/images/successRegis/Isolation_Mode-2.svg" class="d-none  d-flex isolation-mode-2"
+    <img src="src/assets/images/successRegis/Isolation_Mode-2.svg" class="d-none d-lg-flex isolation-mode-2"
       alt="Isolation_Mode-2.svg">
-    <img src="src/assets/images/successRegis/Frame.svg" class="d-none d-flex frame" alt="Frame">
+    <img src="src/assets/images/successRegis/Frame.svg" class="d-none d-lg-flex frame" alt="Frame">
     <v-row justify="center">
       <v-col cols="11" md="9">
         <v-img src="../assets/images/successRegis/Group 8965.svg"></v-img>
