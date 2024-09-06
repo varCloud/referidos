@@ -1,5 +1,5 @@
 <template>
-  <v-row align="center" justify="center">
+  <v-row justify="center">
     <template v-for="(icon, index) in icons" :key="index">
       <v-col cols="3">
         <a :href="icon.link" target="_blank">

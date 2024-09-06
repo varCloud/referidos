@@ -28,4 +28,9 @@
   background-color: white !important;
   border-radius: 10px !important;
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
 </style>

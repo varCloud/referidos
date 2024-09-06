@@ -8,9 +8,9 @@
         <formCMV></formCMV>
       </v-col>
     </v-row>
-    <v-row justify="center" class="color">
+    <v-row justify="center">
       <v-col lg="10" xl="10" md="12" sm="12" xs="12" cols="12">
-        <premios></premios>
+        <premios :showText="true"></premios>
       </v-col>
     </v-row>
     <v-row justify="center" class="wrapper-container-imgs">
@@ -37,16 +37,6 @@
         </template>
       </v-col>
     </v-row>
-    <v-row class="pt-5 d-flex d-lg-none" style="margin: 0%; background-color: #343A40;">
-      <v-col>
-        <footerCMV></footerCMV>
-      </v-col>
-    </v-row>
-    <v-row class="background-black pt-5 d-none d-lg-flex" style="margin: 0%; background-color: #1D1D1B;">
-      <v-col>
-        <footerCMV></footerCMV>
-      </v-col>
-    </v-row>
   </div>
 </template>
 
@@ -55,7 +45,6 @@ import imageFriend from "@/views/components/imageFriends.vue"
 import formCMV from "@/views/components/form.vue"
 import benefits from "./components/benefits.vue";
 import savingAccount from "./components/savingAccount.vue"
-import footerCMV from "./components/footer.vue"
 import slide from "./components/slide.vue"
 import premios from "./components/premios.vue";
 import { ref } from "vue";
@@ -78,7 +67,7 @@ const dataCards = ref([{
   text: 'Transfiere de manera segura desde la app CMV+ a cualquier otro banco'
 },])
 </script>
-<style>
+<style scoped>
 .color {
   background-color: #f2f2f2;
 }

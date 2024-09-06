@@ -171,8 +171,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import referidosService from "@/services/referidosService"
-import { useRoute } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
+const router = useRouter()
 const loading = ref(false);
 const loadingEstados = ref(false)
 
@@ -336,6 +337,7 @@ const handleResponse = (response) => {
   if (response.status == 200 && response.data.AltaRegistroReferidoResult.Codigo == 200) {
     initForm();
     snackBarSuccess.value = true;
+    router.push('Felicidades')
   } else {
     snackBarDanger.value = true;
     errorMensaje.value = response.data.AltaRegistroReferidoResult.Mensaje;

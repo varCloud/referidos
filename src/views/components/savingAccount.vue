@@ -1,6 +1,6 @@
 <template>
   <template class="d-flex d-sm-none">
-    <v-row justify="center" class="">
+    <v-row justify="center">
       <v-col cols="11" class="text-saving-title">
         <span><span class="color-green">Cuenta de Ahorros</span> y Transferencias electrónicas ilimitadas</span>
       </v-col>
@@ -30,7 +30,7 @@
       <v-row>
         <v-col cols="6">
           <v-row justify="end">
-            <v-row justify="end" style="background-color: #84bd00;" noGutters>
+            <v-row justify="end" style="background-color: #84bd00;" no-gutters>
               <v-col cols="10" class="text-saving-subtitle-large">
                 <span class="welcome-text">Te damos </span><br>
                 <span class="thank-you-text"> una cuenta</span>
