@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="container-sucess-main">
+    <img src="src/assets/images/successRegis/Isolation_Mode.svg" class="d-none d-flex isolation-mode" />
+    <img src="src/assets/images/successRegis/Isolation_Mode-1.svg" class="d-none d-flex isolation-mode-1" alt="Isolation_Mode-1">
+    <img src="src/assets/images/successRegis/Isolation_Mode-2.svg"  class="d-none  d-flex isolation-mode-2" alt="Isolation_Mode-2.svg">
+    <img src="src/assets/images/successRegis/Frame.svg" class="d-none d-flex frame" alt="Frame">
     <v-row justify="center">
       <v-col cols="11" md="9">
         <v-img src="../assets/images/successRegis/Group 8965.svg"></v-img>
@@ -55,6 +59,7 @@
 import premios from "./components/premios.vue";
 </script>
 <style scoped>
+
 .text1 {
   text-align: center;
   font-family: Montserrat;
@@ -79,4 +84,34 @@ import premios from "./components/premios.vue";
   padding-top: 10px;
   padding-bottom: 40px;
 }
+.container-sucess-main{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.isolation-mode{
+  position: absolute;
+  top: 50%;
+  left:15%;
+}
+
+.isolation-mode-1{
+  position: absolute;
+  top: 40%;
+  right:20%;
+}
+
+.isolation-mode-2{
+  position: absolute;
+  top: 55%;
+  right:13%;
+}
+
+.frame{
+  position: absolute;
+  top: 34%;
+  left:19%;
+}
+
 </style>
