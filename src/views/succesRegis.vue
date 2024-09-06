@@ -39,19 +39,32 @@
         <premios :showText="false"></premios>
       </v-col>
     </v-row>
-    <v-row justify="center" class="pb-10">
-      <v-col cols="10">
-        <v-row justify="center">
-          <v-col lg="3" xl="3" md="3" sm="3" xs="10" cols="10" class="d-flex flex-column align-end">
-            <v-img src="/src/assets/images/successRegis/interrogacion.svg" width="127px" height="215px"></v-img>
-          </v-col>
-          <v-col align-self="center">
-            <span class="text2">Para más información llama a nuestro Centro de atención: 800 3000 268 o escríbenos
-              por WhatsApp</span>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+    <template class="d-flex d-sm-none pt-4">
+      <v-row justify="center" class="pb-10">
+        <v-col cols="10">
+          <v-row justify="center">
+            <v-col cols="10" class="d-flex flex-column align-center">
+              <v-img src="/src/assets/images/successRegis/interrogacion.svg" width="127px" height="215px"></v-img>
+            </v-col>
+            <v-col cols="10" align-self="center">
+              <span class="text2">Para más información llama a nuestro Centro de atención: 800 3000 268 o escríbenos
+                por WhatsApp</span>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </template>
+    <template class="d-none d-sm-flex">
+      <v-row justify="center" class="pb-10">
+        <v-col cols="2" class="d-flex flex-column align-end">
+          <v-img src="/src/assets/images/successRegis/interrogacion.svg" width="127px" height="215px"></v-img>
+        </v-col>
+        <v-col cols="8" align-self="center">
+          <span class="text2">Para más información llama a nuestro Centro de atención: 800 3000 268 o escríbenos
+            por WhatsApp</span>
+        </v-col>
+      </v-row>
+    </template>
   </div>
 </template>
 
