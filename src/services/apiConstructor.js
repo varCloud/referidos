@@ -35,5 +35,7 @@ const HeaderAPIManager = () => {
 const HeaderAPIManagerOnboarding = () => {
   return {
     'X-IBM-Client-Id': `${import.meta.env.VITE_IBM_CLIENT_ID_ONBOARDING}`,
+    'Usuario': 'CMVAPLICACIONES',
+    'Contrasena': 'B68571606C88ECB993E6B983C27A61',
   }
 };
