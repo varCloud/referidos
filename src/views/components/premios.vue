@@ -3,7 +3,7 @@
     <v-container>
       <v-row justify="center" v-if="props.showText">
         <v-col cols="12" class="text-saving-title">
-          <span>Premios</span>
+          <span>Participa para ganar</span>
         </v-col>
       </v-row>
       <v-row>
@@ -14,11 +14,11 @@
     </v-container>
   </template>
   <template class="d-none d-sm-flex">
-    <v-row>
-      <v-col cols="2" v-if="props.showText">
+    <v-row justify="start">
+      <v-col cols="10" v-if="props.showText">
         <div class="inline-content">
           <v-img src="/src/assets/images/Home/rectangleGreenLarge.svg" width="20px" height="116px"></v-img>
-          <span class="text-saving-title-large pl-8">Premios</span>
+          <span class="text-saving-title-large pl-8">Participa para ganar</span>
         </div>
       </v-col>
       <v-col cols="12" class="d-flex justify-center align-center">
@@ -31,7 +31,12 @@
 import slidePremios from "./slidePremios.vue"
 import { ref } from "vue";
 
-const props = defineProps({ showText: Boolean = true })
+const props = defineProps({
+  showText: {
+    type: Boolean,
+    default: true
+  }
+})
 
 const dataCards = ref([{
   img: './src/assets/images/slides/Iphone13.png',
@@ -129,5 +134,9 @@ const dataCards = ref([{
 .inline-content {
   display: flex;
   align-items: center;
+}
+
+.v-responsive {
+  flex: 0 0 auto;
 }
 </style>

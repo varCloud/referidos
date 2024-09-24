@@ -12,25 +12,22 @@
       </v-col>
     </v-row>
     <v-row justify="center" no-gutters>
-      <v-col cols="10" class="text-center">
-        <span class="text1">Ahora acude a tu sucursal más cercana<br>
-          para convertirte en socio y gozar de<br>
-          todos los beneficios.
-        </span>
-      </v-col>
-      <v-col cols="10" class="text-center">
-        <span class="text1">Recuerda llevar contigo:</span>
-      </v-col>
-      <v-col lg="3" xl="3" md="5" sm="6" xs="10" cols="10">
-        <span class="text2">
-          1. INE<br>
-          2. Comprobante de domicilio vigente<br>
-          3. Y tu aportación Social
+      <v-col lg="4" xl="4" md="5" sm="6" xs="10" cols="10" class="text-center">
+        <span class="text1">Pronto uno de nuestros ejecutivos se pondrá en contacto contigo para asistirte en la
+          apertura de tu cuenta.
         </span>
       </v-col>
     </v-row>
-    <v-row class="padding" justify="center">
-      <v-col class="text-center">
+    <v-row justify="center">
+      <v-col lg="4" xl="4" md="5" sm="6" xs="10" cols="10">
+        <div class="inline-content" @click="showAlert()">
+          <span class="text2">Consulta los requisitos aquí</span>
+          <v-img src="/src/assets/images/Question.svg" width="24px" height="24px"></v-img>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="10" class="text-center">
         <span class="text2">
           Al unirte como socio en nuestra<br>Cooperativa tendrás la oportunidad de<br>ganar increíbles premios.
         </span>
@@ -67,11 +64,29 @@
         </v-col>
       </v-row>
     </template>
+    <div>
+    </div>
   </div>
+  <dialogRequisitos v-model="isDialogOpen" title="Requisitos">
+    <template v-slot>
+      A. INE<br>
+      B. Comprobante Domicilio<br>
+      C. Cubrir Certificado de Aportación
+    </template>
+  </dialogRequisitos>
 </template>
 
 <script setup>
 import premios from "./components/premios.vue";
+import dialogRequisitos from "./components/dialogRequisitos.vue";
+import { ref } from 'vue';
+
+const isDialogOpen = ref(false);
+
+const showAlert = () => {
+  isDialogOpen.value = true
+}
+
 </script>
 <style scoped>
 .text1 {
@@ -88,14 +103,9 @@ import premios from "./components/premios.vue";
   font-weight: 500;
 }
 
-.padding {
-  padding-top: 100px;
-}
-
 .inline-content {
   display: flex;
   align-items: center;
-  padding-top: 10px;
   padding-bottom: 40px;
 }
 

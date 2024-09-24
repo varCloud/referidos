@@ -55,11 +55,16 @@
           rounded="lg" class="customHolder" type="tel" :placeholder="textTelCel" variant="outlined" required
           @blur="touchField('telCel')" @input="telCel = telCel.replace(/[^0-9]/g, '')"></v-text-field>
       </v-col>
-      <v-col cols="10" class="pt-0">
+      <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textEmail }}</span>
         <v-text-field :loading="loading" v-model="email" :rules="[rules.required, rules.email]" maxlength="40"
           rounded="lg" type="email" class="customHolder" :placeholder="textEmail" variant="outlined" required
           @blur="touchField('email')"></v-text-field>
+      </v-col>
+      <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
+        <span class="textLabel">{{ textCP }}</span>
+        <v-text-field :loading="loading" v-model="cp" :rules="[rules.required]" rounded="lg" class="customHolder"
+          type="number" :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"></v-text-field>
       </v-col>
       <v-col cols="10" class="pt-0">
         <span class="textLabel">{{ textCR }}</span>
@@ -113,21 +118,28 @@
           @blur="touchField('curp')" @input="curp = curp.toUpperCase()"
           style="text-transform: uppercase"></v-text-field>
       </v-col>
-      <v-row no-gutters justify="center">
-        <v-col cols="10" class="text-right">
-          <v-row no-gutters justify="start">
-            <div class="icon-text-container" @click="handleClick">
-              <img src="../../assets/images/iconInfoGreen.svg" alt="Icono" class="icon" />
-              <span class="text">No recuerdo mi CURP</span>
-            </div>
-          </v-row>
-        </v-col>
-      </v-row>
-      <v-col cols="10" class="pt-2">
+      <v-col cols="10">
+        <v-row no-gutters justify="d-flex justify-center">
+          <v-col cols="11" class="text-right">
+            <v-row no-gutters justify="start">
+              <div class="icon-text-container pb-5" @click="handleClick">
+                <img src="../../assets/images/iconInfoGreen.svg" alt="Icono" class="icon" />
+                <span class="text">No recuerdo mi CURP</span>
+              </div>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textEmail }}</span>
         <v-text-field :loading="loading" v-model="email" :rules="[rules.required, rules.email]" maxlength="40"
           rounded="lg" type="email" class="customHolder" :placeholder="textEmail" variant="outlined" required
           @blur="touchField('email')"></v-text-field>
+      </v-col>
+      <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
+        <span class="textLabel">{{ textCP }}</span>
+        <v-text-field :loading="loading" v-model="cp" :rules="[rules.required]" rounded="lg" class="customHolder"
+          type="number" :placeholder="textCP" variant="outlined" required @blur="touchField('cp')"></v-text-field>
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pr-sm-5">
         <span class="textLabel">{{ textTelCel }}</span>
@@ -180,6 +192,7 @@ const loadingEstados = ref(false)
 const textCurp = ref("CURP")
 const textNombre = ref("Nombre(s)*");
 const textTelCel = ref("Teléfono celular*");
+const textCP = ref("Código Postal*")
 const textEmail = ref("Email*");
 const textCR = ref("Código referido*");
 const textApellidoPaterno = ref("Apellido Paterno*")
@@ -200,6 +213,7 @@ const telCel = ref("");
 const curp = ref("");
 const email = ref("");
 const cr = ref("");
+const cp = ref();
 const apellidoPaterno = ref("");
 const apellidoMaterno = ref("");
 const diaNacimiento = ref();
@@ -245,6 +259,7 @@ const mesNacimientoTouched = ref(false);
 const anioNacimientoTouched = ref(false);
 const sexoTouched = ref(false);
 const estadoTouched = ref(false);
+const cpTouched = ref(false);
 
 const touchField = (field) => {
   switch (field) {
@@ -284,6 +299,9 @@ const touchField = (field) => {
     case 'estado':
       estadoTouched.value = true;
       break;
+    case 'cp':
+      cpTouched.value = true;
+      break
   }
 };
 
@@ -347,7 +365,7 @@ const handleResponse = (response) => {
 const submitFormGeneric = (isCurpForm = false) => {
   loading.value = true;
   if (isCurpForm) {
-    setTouchedFields([curpTouched, telCelTouched, emailTouched, crTouched]);
+    setTouchedFields([curpTouched, telCelTouched, emailTouched, crTouched, cpTouched]);
   } else {
     setTouchedFields([
       nombreTouched,
@@ -360,7 +378,8 @@ const submitFormGeneric = (isCurpForm = false) => {
       mesNacimientoTouched,
       anioNacimientoTouched,
       sexoTouched,
-      estadoTouched
+      estadoTouched,
+      cpTouched
     ]);
   }
   if (valid) {
@@ -370,6 +389,7 @@ const submitFormGeneric = (isCurpForm = false) => {
         Mail: email.value,
         Telefono: telCel.value,
         Curp: curp.value,
+        CodigoPostal: cp.value,
       }
       : {
         AnioNacimiento: anioNacimiento.value,
@@ -382,6 +402,7 @@ const submitFormGeneric = (isCurpForm = false) => {
         MesNacimiento: mesNacimiento.value,
         Nombre: nombre.value,
         Sexo: sexo.value,
+        CodigoPostal: cp.value,
         Telefono: telCel.value,
       };
     referidosService.altaRegistroReferido(formData)
@@ -413,13 +434,13 @@ const initForm = () => {
     nombre, telCel, curp, email,
     apellidoPaterno, apellidoMaterno,
     diaNacimiento, mesNacimiento, anioNacimiento,
-    sexo, estado, cr
+    sexo, estado, cr, cp
   ]);
   resetTouched([
     nombreTouched, telCelTouched, curpTouched, emailTouched, crTouched,
     apellidoPaternoTouched, apellidoMaternoTouched,
     diaNacimientoTouched, mesNacimientoTouched, anioNacimientoTouched,
-    sexoTouched, estadoTouched
+    sexoTouched, estadoTouched, cp
   ]);
   cr.value = route.query.codigoReferido || '';
 };
