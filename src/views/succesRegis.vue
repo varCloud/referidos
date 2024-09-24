@@ -20,16 +20,17 @@
     </v-row>
     <v-row justify="center">
       <v-col lg="4" xl="4" md="5" sm="6" xs="10" cols="10">
-        <div class="inline-content" @click="showAlert()">
+        <div class="inline-content">
           <span class="text2">Consulta los requisitos aquí</span>
-          <v-img src="/src/assets/images/Question.svg" width="24px" height="24px"></v-img>
+          <v-img @click="showAlert()" class="cursos" src="/src/assets/images/Question.svg" width="24px"
+            height="24px"></v-img>
         </div>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="10" class="text-center">
         <span class="text2">
-          Al unirte como socio en nuestra<br>Cooperativa tendrás la oportunidad de<br>ganar increíbles premios.
+          Al unirte como socio en nuestra<br>Cooperativa tendrás la oportunidad de<br>ganar increíbles regalos.
         </span>
       </v-col>
     </v-row>
@@ -145,5 +146,9 @@ const showAlert = () => {
 
 .v-row {
   z-index: 1;
+}
+
+.cursos {
+  cursor: pointer;
 }
 </style>
