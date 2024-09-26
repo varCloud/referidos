@@ -68,7 +68,7 @@
       </v-col>
       <v-col cols="10" class="pt-0">
         <span class="textLabel">{{ textCR }}</span>
-        <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder"
+        <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" :readonly="true" rounded="lg" class="customHolder"
           :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"></v-text-field>
       </v-col>
     </v-row>
@@ -149,7 +149,7 @@
       </v-col>
       <v-col cols="10" sm="5" class="pt-0 pl-sm-5">
         <span class="textLabel">{{ textCR }}</span>
-        <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" rounded="lg" class="customHolder"
+        <v-text-field :loading="loading" v-model="cr" :rules="[rules.required]" :readonly="true" rounded="lg" class="customHolder"
           :placeholder="textCR" variant="outlined" required @blur="touchField('cr')"></v-text-field>
       </v-col>
     </v-row>

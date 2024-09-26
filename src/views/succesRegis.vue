@@ -48,7 +48,7 @@
             </v-col>
             <v-col cols="10" align-self="center">
               <span class="text2">Para más información llama a nuestro Centro de atención: 800 3000 268 o escríbenos
-                por WhatsApp</span>
+                por <span class="greenText">WhatsApp</span></span>
             </v-col>
           </v-row>
         </v-col>
@@ -61,7 +61,7 @@
         </v-col>
         <v-col cols="8" align-self="center">
           <span class="text2">Para más información llama a nuestro Centro de atención: 800 3000 268 o escríbenos
-            por WhatsApp</span>
+            por <span class="greenText">WhatsApp</span></span>
         </v-col>
       </v-row>
     </template>
@@ -103,6 +103,10 @@ const showAlert = () => {
   font-size: 32px;
   font-weight: 500;
 }
+
+.greenText {
+    color: #84bd00;
+  }
 
 .inline-content {
   display: flex;
