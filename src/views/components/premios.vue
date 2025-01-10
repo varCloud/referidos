@@ -40,7 +40,7 @@ const props = defineProps({
 
 const dataCards = ref([{
   img: './src/assets/images/slides/Iphone13.png',
-  title: 'Iphone 13 128gb',
+  title: 'Iphone 15 128gb',
   text: ''
 }, {
   img: './src/assets/images/slides/SmartWach.jpg',
