@@ -13,18 +13,22 @@
     </v-row>
     <v-row justify="center" no-gutters>
       <v-col lg="4" xl="4" md="5" sm="6" xs="10" cols="10" class="text-center">
-        <span class="text1">Pronto uno de nuestros ejecutivos se pondrá en contacto contigo para asistirte en la
-          apertura de tu cuenta.
+        <span class="text1">
+          Pronto uno de nuestros ejecutivos se pondrá en contacto contigo para ayudarte con la apertura de tu cuenta y gestionar la obtención de tu crédito.
         </span>
       </v-col>
     </v-row>
     <v-row justify="center">
-      <v-col lg="4" xl="4" md="5" sm="6" xs="10" cols="10">
-        <div class="inline-content">
-          <span class="text2">Consulta los requisitos aquí</span>
-          <v-img @click="showAlert()" class="cursos" src="/src/assets/images/Question.svg" width="24px"
-            height="24px"></v-img>
+      <v-col lg="6" xl="6" md="6" sm="8" xs="10" cols="10">
+        <div class="inline-content2">
+          <span class="greenTitle">Que necesitas:</span>
         </div>
+        <ol class="text3">
+          <li>INE vigente.</li>
+          <li>Comprobante de domicilio vigente.</li>
+          <li>Cubrir tu certificado de aportación.</li>
+          <li>Cubrir tu seguro de vida.</li>
+        </ol>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -104,14 +108,35 @@ const showAlert = () => {
   font-weight: 500;
 }
 
+.text3 {
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 25px;
+  font-weight: 500;
+  list-style-position: inside;
+}
+
 .greenText {
     color: #84bd00;
   }
+
+.greenTitle {
+    text-align: center;
+    color: #84bd00;
+    font-size: 40px;
+    width: -webkit-fill-available;
+  }
+
 
 .inline-content {
   display: flex;
   align-items: center;
   padding-bottom: 40px;
+}
+
+.inline-content2 {
+  display: flex;
+  align-items: center;
 }
 
 .container-sucess-main {
